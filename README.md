@@ -15,8 +15,8 @@ Este projeto consiste em um setup inicial de um CRUD (Create, Read, Update, Dele
 
 1. Clone o repositório:
    ```bash
-   git clone <URL_DO_REPOSITORIO>
-   cd <NOME_DO_REPOSITORIO>
+   git clone https://github.com/lopesmauro/crud-with-prisma.git
+   cd crud-with-prisma
    ```
 2. Instale as dependências
    ```
