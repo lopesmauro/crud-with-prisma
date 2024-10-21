@@ -1,21 +1,43 @@
-import { createUser, getAllUsers, updateUser, deleteUser } from '../services/userService';
+import { createUser, getAllUsers, updateUser, deleteUser } from '../services/userService'
 
 export const createUserController = async (req, res) => {
-    const user = await createUser(req.body);
-    res.status(201).json(user);
-};
+    try {
+        const user = await createUser(req.body)
+        res.status(201).json(user)
+    } catch (error) {
+        res.status(500).json({ message: "Erro ao criar usuário" })
+    }
+}
 
 export const getAllUsersController = async (req, res) => {
-    const users = await getAllUsers(req.query);
-    res.status(200).json(users);
-};
+    try {
+        const users = await getAllUsers(req.query)
+        res.status(200).json(users)
+    } catch (error) {
+        res.status(500).json({ message: "Erro ao obter usuários" })
+    }
+}
 
 export const updateUserController = async (req, res) => {
-    const user = await updateUser(req.params.id, req.body);
-    res.status(200).json(user);
-};
+    try {
+        const user = await updateUser(req.params.id, req.body)
+        if (!user) {
+            return res.status(404).json({ message: "Usuário não encontrado" })
+        }
+        res.status(200).json(user)
+    } catch (error) {
+        res.status(500).json({ message: "Erro ao atualizar usuário" })
+    }
+}
 
 export const deleteUserController = async (req, res) => {
-    await deleteUser(req.params.id);
-    res.status(200).json({ message: "usuário deletado com sucesso" });
-};
+    try {
+        const result = await deleteUser(req.params.id)
+        if (!result) {
+            return res.status(404).json({ message: "Usuário não encontrado" })
+        }
+        res.status(200).json({ message: "Usuário deletado com sucesso" })
+    } catch (error) {
+        res.status(500).json({ message: "Erro ao deletar usuário" })
+    }
+}
